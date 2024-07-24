@@ -3,65 +3,30 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "uri": "arn:aws:lambda:eu-west-1:730335241856:function:0c505854-4d44-4d03-8180-85e7c3659867:Release_0"
+          "uri": "arn:aws:lambda:eu-west-1:730335241856:function:7b8ac645-45fa-45f9-af04-73e0cc3033c2:Release_0"
         },
         "interfaces": [],
         "locales": {},
         "regions": {
           "NA": {
             "endpoint": {
-              "uri": "arn:aws:lambda:us-east-1:730335241856:function:0c505854-4d44-4d03-8180-85e7c3659867:Release_0"
+              "uri": "arn:aws:lambda:us-east-1:730335241856:function:7b8ac645-45fa-45f9-af04-73e0cc3033c2:Release_0"
             }
           },
           "EU": {
             "endpoint": {
-              "uri": "arn:aws:lambda:eu-west-1:730335241856:function:0c505854-4d44-4d03-8180-85e7c3659867:Release_0"
+              "uri": "arn:aws:lambda:eu-west-1:730335241856:function:7b8ac645-45fa-45f9-af04-73e0cc3033c2:Release_0"
             }
           },
           "FE": {
             "endpoint": {
-              "uri": "arn:aws:lambda:us-west-2:730335241856:function:0c505854-4d44-4d03-8180-85e7c3659867:Release_0"
+              "uri": "arn:aws:lambda:us-west-2:730335241856:function:7b8ac645-45fa-45f9-af04-73e0cc3033c2:Release_0"
             }
           }
         }
       }
     },
     "manifestVersion": "1.0",
-    "permissions": [
-      {
-        "name": "alexa::devices:all:address:full:read"
-      },
-      {
-        "name": "alexa::profile:name:read"
-      },
-      {
-        "name": "alexa::profile:email:read"
-      },
-      {
-        "name": "alexa::profile:mobile_number:read"
-      },
-      {
-        "name": "alexa::household:lists:read"
-      },
-      {
-        "name": "alexa::household:lists:write"
-      },
-      {
-        "name": "alexa::alerts:reminders:skill:readwrite"
-      },
-      {
-        "name": "alexa::devices:all:geolocation:read"
-      },
-      {
-        "name": "alexa::person_id:read"
-      },
-      {
-        "name": "alexa::authenticate:2:mandatory"
-      },
-      {
-        "name": "alexa::alerts:timers:skill:readwrite"
-      }
-    ],
     "publishingInformation": {
       "distributionCountries": [],
       "isAvailableWorldwide": true,
@@ -74,7 +39,7 @@
             "help"
           ],
           "keywords": [],
-          "name": "Hackathon Project",
+          "name": "HackathonBookSkill",
           "summary": "Sample Short Description"
         }
       },
