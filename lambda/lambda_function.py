@@ -8,6 +8,7 @@ import logging
 import csv
 import requests
 import io
+import calendar
 import ask_sdk_core.utils as ask_utils
 
 from ask_sdk_core.skill_builder import SkillBuilder
@@ -30,38 +31,54 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Welcome, to book recomendation"
+        speak_output = "Hello! Welcome to Hackathon Project. Would you like to now your zodiac sign? or Do you want me to suggest books?"
+        reprompt_text = "I was born Nov. 6th, 2014. When were you born? or I am looking for a book with Techno genre English language Stephen King Author, What is your choice of book?"
 
         return (
             handler_input.response_builder
                 .speak(speak_output)
-                .ask(speak_output)
+                .ask(reprompt_text)
                 .response
         )
 
-
-class SuggestBookIntentHandler(AbstractRequestHandler):
+class CaptureZodiacSignIntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("SuggestBookIntent")(handler_input)
+        return ask_utils.is_intent_name("CaptureZodiacSignIntent")(handler_input)
+       
+    def filter(self, X):
+        date = X.split()
+        month = date[0]
+        month_as_index = list(calendar.month_abbr).index(month[:3].title())
+        day = int(date[1])
+        return (month_as_index,day)
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         slots = handler_input.request_envelope.request.intent.slots
-        genre = slots["genre"].value.lower()
-        url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzFfD2NcqZNLQPgP5u7I9tJjIo-DC4HT0OlchDG2KiJpzhJvhFSXhUN7lH81AXnKZBZdb58xERQYoA/pub?gid=0&single=true&output=csv"
+        year = slots["year"].value
+        month = slots["month"].value
+        day = slots["day"].value
+        url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSd-oxA-SLEp9i1MhlWQKyvYi5ltVygLpYyIuAteqnI2Wn-1CYOupofnTlew08tbg/pub?gid=107908893&single=true&output=csv"
         response = requests.get(url)
+        #response.raise_for_status()  # Raise an exception if the request fails
         csv_content = response.content
-        row = csv_content.decode('utf-8').splitlines()
-        data_dict = {}
-        for r in row:
-            key, value = r.split(",", 1)
-            key = key.lower()
-            data_dict[key] = value
-        # print(name.lower())
         
-        speak_output = 'Your Genre is {genre} \n Your recomendations are: {row}.'.format(genre=genre, row=data_dict.get(genre, "Genre not found"))
+        row = csv_content.decode('utf-8').splitlines()
+        rows = row[1:]
+        zodiac = ''
+        
+        month_as_index = list(calendar.month_abbr).index(month[:3].title())
+        usr_dob = (month_as_index,int(day))
+        for sign in rows:
+            start, end , zodiac = sign.split(',')
+            if self.filter(start) <= usr_dob <= self.filter(end):
+                zodiac = zodiac
+                break
+
+        speak_output = 'I see you were born on the {day} of {month} {year}, which means that your zodiac sign will be {zodiac}.'.format(month=month, day=day, year=year, zodiac=zodiac)
+
 
         return (
             handler_input.response_builder
@@ -69,8 +86,43 @@ class SuggestBookIntentHandler(AbstractRequestHandler):
                 # .ask("add a reprompt if you want to keep the session open for the user to respond")
                 .response
         )
-
-
+class CaptureBookSuggestIntent(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("CaptureBookSuggestIntent")(handler_input)
+        
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        slots = handler_input.request_envelope.request.intent.slots
+        genre = slots["genre"].value
+        author = slots["author"].value
+        language = slots["language"].value
+        url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdMVMTdiW3WxegqXPJLhwZP9XYTiV5No56MmSnMN8h1tb4HcklaQxrDBm0mjLtRg/pub?gid=218284848&single=true&output=csv"
+        response = requests.get(url)
+        #response.raise_for_status()  # Raise an exception if the request fails
+        
+        csv_content = response.content
+        row = csv_content.decode('utf-8').splitlines()
+        rows = row[1:]
+        the_book = ''
+        
+        for r in rows:
+            r = r.split(',')
+            if genre.lower() in r[0] and author.lower() in r[1] and language.lower() in r[2]:
+                the_book = the_book +","+ r[3]
+                
+        if len(the_book) == 0:
+            the_book = "No books"
+        
+        speak_output = 'I see that you are looking for a book {a} author {b} genre {c} language, the books are {d} '.format(a=author, b=genre, c=language, d=the_book)
+        
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
     def can_handle(self, handler_input):
@@ -187,7 +239,8 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
-sb.add_request_handler(SuggestBookIntentHandler())
+sb.add_request_handler(CaptureZodiacSignIntentHandler())
+sb.add_request_handler(CaptureBookSuggestIntent())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())

@@ -3,24 +3,24 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "uri": "arn:aws:lambda:eu-west-1:730335241856:function:7b8ac645-45fa-45f9-af04-73e0cc3033c2:Release_0"
+          "uri": "arn:aws:lambda:eu-west-1:211125464645:function:70e925f3-3010-4454-ae66-23b9b26243b6:Release_0"
         },
         "interfaces": [],
         "locales": {},
         "regions": {
           "NA": {
             "endpoint": {
-              "uri": "arn:aws:lambda:us-east-1:730335241856:function:7b8ac645-45fa-45f9-af04-73e0cc3033c2:Release_0"
+              "uri": "arn:aws:lambda:us-east-1:211125464645:function:70e925f3-3010-4454-ae66-23b9b26243b6:Release_0"
             }
           },
           "EU": {
             "endpoint": {
-              "uri": "arn:aws:lambda:eu-west-1:730335241856:function:7b8ac645-45fa-45f9-af04-73e0cc3033c2:Release_0"
+              "uri": "arn:aws:lambda:eu-west-1:211125464645:function:70e925f3-3010-4454-ae66-23b9b26243b6:Release_0"
             }
           },
           "FE": {
             "endpoint": {
-              "uri": "arn:aws:lambda:us-west-2:730335241856:function:7b8ac645-45fa-45f9-af04-73e0cc3033c2:Release_0"
+              "uri": "arn:aws:lambda:us-west-2:211125464645:function:70e925f3-3010-4454-ae66-23b9b26243b6:Release_0"
             }
           }
         }
@@ -39,7 +39,18 @@
             "help"
           ],
           "keywords": [],
-          "name": "HackathonBookSkill",
+          "name": "Hackathon Project",
+          "summary": "Sample Short Description"
+        },
+        "en-GB": {
+          "description": "Sample Full Description",
+          "examplePhrases": [
+            "Alexa open hello world",
+            "hello",
+            "help"
+          ],
+          "keywords": [],
+          "name": "Hackathon Project",
           "summary": "Sample Short Description"
         }
       },

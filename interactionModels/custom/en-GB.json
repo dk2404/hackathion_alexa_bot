@@ -14,21 +14,21 @@
               }
             },
             {
-              "name": "year",
-              "elicitationRequired": true,
-              "type": "AMAZON.FOUR_DIGIT_NUMBER",
-              "confirmationRequired": false,
-              "prompts": {
-                "elicitation": "Elicit.Slot.1654006531166.268568983488"
-              }
-            },
-            {
               "name": "day",
               "elicitationRequired": true,
               "type": "AMAZON.Ordinal",
               "confirmationRequired": false,
               "prompts": {
                 "elicitation": "Elicit.Slot.1606195499006.611428550122"
+              }
+            },
+            {
+              "name": "year",
+              "elicitationRequired": true,
+              "type": "AMAZON.FOUR_DIGIT_NUMBER",
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1654006531166.268568983488"
               }
             }
           ],
@@ -44,7 +44,7 @@
               "type": "AMAZON.Genre",
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.684763185359.615985400755"
+                "elicitation": "Elicit.Slot.255083743856.421024149034"
               }
             },
             {
@@ -53,7 +53,7 @@
               "type": "AMAZON.Author",
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.684763185359.1355143414200"
+                "elicitation": "Elicit.Slot.255083743856.652089722117"
               }
             },
             {
@@ -62,11 +62,11 @@
               "type": "AMAZON.Language",
               "confirmationRequired": false,
               "prompts": {
-                "elicitation": "Elicit.Slot.684763185359.803812705818"
+                "elicitation": "Elicit.Slot.255083743856.173388250456"
               }
             }
           ],
-          "name": "CaptureBookSuggest",
+          "name": "CaptureBookSuggestIntent",
           "confirmationRequired": false,
           "prompts": {}
         }
@@ -99,28 +99,50 @@
           "slots": [
             {
               "multipleValues": {
-                "enabled": false
+                "enabled": true
               },
               "name": "month",
               "type": "AMAZON.Month"
             },
             {
               "multipleValues": {
-                "enabled": false
-              },
-              "name": "year",
-              "type": "AMAZON.FOUR_DIGIT_NUMBER"
-            },
-            {
-              "multipleValues": {
-                "enabled": false
+                "enabled": true
               },
               "name": "day",
               "type": "AMAZON.Ordinal"
+            },
+            {
+              "multipleValues": {
+                "enabled": true
+              },
+              "name": "year",
+              "type": "AMAZON.FOUR_DIGIT_NUMBER"
             }
           ],
           "name": "CaptureZodiacSignIntent",
           "samples": [
+            "here is my dob {year} {day} {month}",
+            "here is my dob {year} {month} {day}",
+            "here is my dob {month} {day} {year}",
+            "here is my dob {month} {year} {day}",
+            "here is my dob {day} {year} {month}",
+            "here is my dob {day} {month} {year}",
+            "I was born on {year} {month} {day} what is my zodiac sign",
+            "I was born on {year} {day} {month} what is my zodiac sign",
+            "I was born on {month} {year} {day} what is my zodiac sign",
+            "I was born on {month} {day} {year} what is my zodiac sign",
+            "I was born on {day} {year} {month} what is my zodiac sign",
+            "I was born on {day} {month} {year} what is my zodiac sign",
+            "my dob is {day} {month} {year}",
+            "my dob is {day} {year} {month}",
+            "my dob is {year} {day} {month}",
+            "my dob is {year} {month} {day}",
+            "my dob is {month} {year} {day}",
+            "my dob is {month} {day} {year}",
+            "what is my zodiac sign with {month} {day} {year}",
+            "what is my zodiac sign with {day} {year} {month}",
+            "what is my zodiac sign with {year} {day} {month}",
+            "what is my zodiac sign with {year} {month} {day}",
             "my month is {month}",
             "my date is {day}",
             "my year is {year}",
@@ -141,7 +163,7 @@
             "can you tell me what is my sign {day} {month} {year}",
             "what is my zodiac sign with {day} {month} {year}",
             "what is my zodiac sign with {month} {year} {day}",
-            "{day} ",
+            "{day}",
             "born in {month} {year} {day}",
             "born in {year} {day} {month}",
             "born in {day} {month} {year}",
@@ -156,28 +178,83 @@
         {
           "slots": [
             {
+              "multipleValues": {
+                "enabled": true
+              },
               "name": "genre",
               "type": "AMAZON.Genre"
             },
             {
+              "multipleValues": {
+                "enabled": true
+              },
               "name": "author",
               "type": "AMAZON.Author"
             },
             {
+              "multipleValues": {
+                "enabled": true
+              },
               "name": "language",
               "type": "AMAZON.Language"
             }
           ],
-          "name": "CaptureBookSuggest",
+          "name": "CaptureBookSuggestIntent",
           "samples": [
+            "do you have books in language {language} and author {author}",
+            "do you have books in genre {genre} and language {language}",
+            "do you have books in language {language} and genre {genre}",
+            "do you have books in author {author} and language {language}",
+            "do you have books in author {author} and genre {genre}",
+            "books in genre {genre} author {author}  and language {language}",
+            "books in author {author} genre {genre} and language {language}",
+            "books in language {language} author {author} and genre {genre}",
+            "books in author {author} language {language} and genre {genre}",
+            "books in language {language} genre {genre} and author {author}",
+            "books in genre {genre} language {language} and author {author}",
+            "books in language {language} and author {author}",
+            "books in author {author} and genre {genre}",
+            "books in genre {genre}  and language {language}",
+            "books in author {author}",
+            "books in language {language}",
+            "books in genre {genre} ",
+            "show book from genre {genre} and author {author}",
+            "show book from language {language} and author {author}",
+            "show book from author {author} and language {language}",
             "{author}",
             "{genre}",
             "{language}",
+            "{genre} {language}",
+            "{language} {genre}",
+            "{author} {language}",
+            "{language} {author}",
+            "{genre} {author}",
+            "{author} {genre}",
+            "{language} {author} {genre}",
+            "{language} {genre} {author}",
+            "{genre} {language} {author}",
+            "{genre} {author} {language}",
+            "{author} {genre} {language}",
+            "{author} {language} {genre}",
             "genre is {genre}",
             "language is {language}",
             "author is {author}",
+            "can you tell some books in {author} author",
+            "can you tell some books in {language} language",
+            "can you tell some books in {genre} genre",
+            "what are all the books with author as {author} with genre {genre}",
+            "what are all the books genre as {genre} with author {author}",
+            "what are all the books with language as {language} and author {author}",
+            "what are all the books with author as {author} and language {language}",
+            "find out books in {language} language with {genre} as genre",
             "find out books in {genre} genre with {language} as language",
+            "suggest me a book in {genre} genre with {language} as language",
             "suggest me a book in {language} language with {genre} as genre",
+            "I am looking for a book with {language} language {genre} genre {author} author",
+            "I am looking for a book with {language} language {author} author {genre} genre",
+            "I am looking for a book with {author} author {genre} genre {language} language",
+            "I am looking for a book with {author} author {language} language {genre} genre",
+            "I am looking for a book with {genre} genre {language} language {author} author",
             "I am looking for a book with {genre} genre {author} author {language} language"
           ]
         }
@@ -217,28 +294,28 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "what genre you are looking"
+            "value": "What genre you are looking"
           }
         ],
-        "id": "Elicit.Slot.684763185359.615985400755"
+        "id": "Elicit.Slot.255083743856.421024149034"
       },
       {
         "variations": [
           {
             "type": "PlainText",
-            "value": "what author you are looking"
+            "value": "What Author you are looking"
           }
         ],
-        "id": "Elicit.Slot.684763185359.1355143414200"
+        "id": "Elicit.Slot.255083743856.652089722117"
       },
       {
         "variations": [
           {
             "type": "PlainText",
-            "value": "what language you are looking"
+            "value": "What Language you are looking"
           }
         ],
-        "id": "Elicit.Slot.684763185359.803812705818"
+        "id": "Elicit.Slot.255083743856.173388250456"
       }
     ]
   }
